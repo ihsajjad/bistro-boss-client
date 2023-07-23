@@ -10,7 +10,7 @@ const Featured = () => {
         heading="Featured Item"
       ></SectionTitle>
 
-      <div className="md:flex justify-center items-center md:gap-10 md:p-20">
+      <div className="md:flex justify-center items-center md:gap-10 md:p-20 bg-black bg-opacity-30">
         <div>
           <img src={featuredImg} alt="" />
         </div>
@@ -25,7 +25,9 @@ const Featured = () => {
             eveniet repellat dolor ipsa qui, magni numquam voluptas quas
             repellendus tenetur. Quia tenetur ab dolorum provident!
           </p>
-          <button className="btn btn-outline mt-6">Order Now</button>
+          <button className="btn btn-outline mt-6 border-0 border-b-4">
+            Order Now
+          </button>
         </div>
       </div>
     </section>
