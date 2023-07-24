@@ -1,4 +1,28 @@
+import { useEffect, useRef, useState } from "react";
+import {
+  loadCaptchaEnginge,
+  LoadCanvasTemplate,
+  validateCaptcha,
+} from "react-simple-captcha";
+
 const Login = () => {
+  const captchaRef = useRef(null);
+  const [disabled, setDisabled] = useState(true);
+
+  useEffect(() => {
+    loadCaptchaEnginge(4);
+  }, []);
+
+  const handleValidateCaptcha = () => {
+    const value = captchaRef.current.value;
+
+    if (validateCaptcha(value)) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
+  };
+
   const handleLogin = (e) => {
     e.preventDefault();
 
@@ -7,6 +31,7 @@ const Login = () => {
     const password = form.password.value;
     console.log(email, password);
   };
+
   return (
     <div className="hero min-h-screen bg-base-200">
       <div className="hero-content flex-col lg:flex-row">
@@ -47,8 +72,25 @@ const Login = () => {
                 </a>
               </label>
             </div>
+            <div className="form-control">
+              <label className="label">
+                <LoadCanvasTemplate />
+              </label>
+              <input
+                type="text"
+                ref={captchaRef}
+                name="captcha"
+                placeholder="Type the captcha above"
+                className="input input-bordered"
+              />
+            </div>
+            <button onClick={handleValidateCaptcha} className="btn btn-xs mt-2">
+              Validate
+            </button>
             <div className="form-control mt-6">
-              <button className="btn btn-primary">Login</button>
+              <button disabled={disabled} className="btn btn-primary">
+                Login
+              </button>
             </div>
           </form>
         </div>
